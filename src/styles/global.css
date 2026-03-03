@@ -1,139 +1,159 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
-		rgba(var(--gray), 33%);
+	--goldenyellow: #fedb8b;
+	--white: #fff;
+	--slate: #262727;
+	--grey-blue: #73849a;
+	--light-grey: #f0f0f0;
+	--light-blue: #8bb8df;
+	--light-blue-contrast: #b6dcfb;
+	--dark-blue: #2b2f33;
+	--dark-pink: #99003b;
+	--dark-green: #2d494e;
+	--light-green: #25b182;
+
+	--button-shadow: 0 8px 16px rgba(0, 0, 0, .1), 0 3px 6px rgba(0, 0, 0, .08);
+	--button-shadow-hover: 0 4px 6px rgba(0, 0, 0, .12), 0 1px 3px rgba(0, 0, 0, .08);
+	--ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+	--body-bg-color: var(--slate);
+	--item-bg-color: var(--dark-blue);
+	--h1-text-size: clamp(1.4rem, 3vw, 3rem);
+	--h2-text-size: clamp(1.2rem, calc(0.5rem + 2vw), 2.4rem);
+	--h3-text-size: clamp(1rem, calc(0.5rem + 1.5vw), 2.2rem);
+	--p-text-size: clamp(1rem, 0.5rem + 1vw, 1.8rem);
+	--code-text-size: clamp(1rem, 0.5rem + 1vw, 1.6rem);
+	--desc-text-size: clamp(0.8rem, 0.5rem + 1vw, 1.4rem);
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+
+* {
+	box-sizing: border-box;
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-bold.woff") format("woff");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
+
+
+html,
 body {
-	font-family: "Atkinson", sans-serif;
-	margin: 0;
+	font-family:
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		Helvetica,
+		Arial,
+		sans-serif,
+		"Apple Color Emoji",
+		"Segoe UI Emoji",
+		"Segoe UI Symbol";
+	width: 100%;
+	min-height: 100%;
+	line-height: 1.4;
 	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	margin: 0;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	scroll-padding-top: 80px;
 }
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+
+html {
+	background-image: linear-gradient(315deg, #5F3D90, #292F49);
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
+
 h1 {
-	font-size: 3.052em;
+	font-size: var(--h1-text-size);
 }
+
 h2 {
-	font-size: 2.441em;
+	font-size: var(--h2-text-size);
 }
+
 h3 {
-	font-size: 1.953em;
+	font-size: var(--h3-text-size);
 }
-h4 {
-	font-size: 1.563em;
+
+time,
+a,
+p,
+li,
+pre {
+	font-size: var(--p-text-size);
+	line-height: 1.6;
 }
-h5 {
-	font-size: 1.25em;
+
+p,
+li {
+	line-height: 2;
 }
-strong,
-b {
-	font-weight: 700;
-}
+
 a {
-	color: var(--accent);
+	outline: none;
+	outline-offset: 0;
+	padding: 0px 2px;
+	margin: 0;
+	border-bottom: 2px solid currentColor;
+	color: var(--goldenyellow);
+	font-weight: 600;
+	text-decoration: none;
 }
-a:hover {
-	color: var(--accent);
+
+a:visited {
+	color: var(--goldenyellow);
 }
-p {
-	margin-bottom: 1em;
+
+a:hover,
+a:focus {
+	outline-offset: 0;
+	outline: double 5px #e4b067;
+	color: #1f190a;
+	background-color: #e4b067;
+	border-bottom-color: transparent;
 }
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
+
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
 }
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+
+.wrapper {
+	background: var(--slate);
+	padding: 1vw 3vw 3vw 3vw;
+	border-radius: 12px;
+	max-width: calc(100ch + 15vw);
+	margin-left: auto;
+	margin-right: auto;
 }
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
+
+@media(max-width: 1350px) {
+	.wrapper {
+		margin: 0 10vw;
+	}
 }
-pre > code {
-	all: unset;
+
+@media(max-width: 600px) {
+	.wrapper {
+		margin: 0 1rem;
+	}
 }
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
+
+.title {
+	display: flex;
 	margin: 0;
-	font-size: 1.333em;
+	font-size: var(--h2-text-size);
+	letter-spacing: -0.04em;
+	padding: 0;
+	text-align: center;
+	color: var(--light-blue);
 }
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+
+.title span {
+	padding-right: 6px;
 }
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+
+::selection {
+	color: black;
+	background: var(--light-blue);
+}
+
+::-moz-selection {
+	color: black;
+	background: var(--light-blue);
 }
 
 .sr-only {

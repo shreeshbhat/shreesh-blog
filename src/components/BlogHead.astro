@@ -1,0 +1,106 @@
+---
+import {
+    formatReadingTime,
+    formatDate,
+    getReadingTime,
+} from "../utils/preview-helper";
+
+export interface Props {
+    blog: any;
+    isHeaderLink: boolean;
+}
+const { blog, isHeaderLink } = Astro.props;
+
+const tagsData = blog.data.tags.map((tag: string) => {
+    return {
+        tag,
+        url: `/tags/${tag}`,
+        label: `All posts tagged with ${tag}`,
+    };
+});
+
+const readingTime = getReadingTime(blog.body);
+---
+
+<style>
+    h2 {
+        font-size: var(--h2-text-size);
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 15px;
+        line-height: 1.6;
+        color: var(--light-blue);
+    }
+
+    .date {
+        font-size: var(--desc-text-size);
+        display: block;
+        margin-top: 0.25rem;
+        margin-bottom: 0.5em;
+    }
+
+    .tag-wrapper {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        margin-right: 10px;
+        margin-bottom: 7px;
+        background-color: var(--dark-green);
+        border-bottom-color: transparent;
+        font-size: var(--desc-text-size);
+        color: var(--light-grey);
+        padding: 5px 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+        user-select: none;
+        letter-spacing: 0.02em;
+        font-weight: 400;
+    }
+
+    .tag:focus,
+    .tag:hover {
+        background-color: var(--dark-green);
+        outline-color: hsl(188deg 13% 53%);
+        border-radius: 0;
+    }
+
+    .read-summary {
+        font-size: var(--desc-text-size);
+    }
+
+    .read-emoji {
+        display: inline-block;
+        padding-left: 10px;
+    }
+</style>
+
+{
+    isHeaderLink ? (
+        <h2>
+            <a class="link" href={blog.url}>
+                {blog.data.title}
+            </a>
+        </h2>
+    ) : (
+        <h2>{blog.title}</h2>
+    )
+}
+<div class="tag-wrapper">
+    {
+        tagsData.map(({ tag, url, label }) => (
+            <a href={url} aria-label={label} class="tag">
+                {tag}
+            </a>
+        ))
+    }
+</div>
+<span class="read-summary">{readingTime} min read</span>
+<div class="read-emoji" aria-hidden="true">
+    {formatReadingTime(readingTime)}
+</div>
+<time class="date" datetime={blog.data.pubDate}
+    >{formatDate(blog.data.pubDate)}</time
+>

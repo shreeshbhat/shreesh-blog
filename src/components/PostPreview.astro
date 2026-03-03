@@ -1,0 +1,47 @@
+---
+import BlogHead from "./BlogHead.astro";
+// import { getReadingTime } from '../utils/preview-helper';
+
+export interface Props {
+  blog: any;
+}
+const { blog } = Astro.props;
+// console.log(blog);
+
+// const readingTime = getReadingTime(blog.body);
+---
+
+<style lang="scss">
+  .blog-post-wrapper {
+    margin: 0 auto;
+  }
+
+  .blog-post {
+    color: var(--light-grey);
+    padding: 35px 40px;
+    margin-bottom: 55px;
+    background-color: var(--item-bg-color);
+    border-radius: 4px;
+    box-shadow: var(--button-shadow);
+  }
+
+  .blog-post-wrapper:last-child .blog-post:last-child {
+    margin-bottom: 0;
+  }
+
+  .link,
+  .description {
+    font-size: var(--p-text-size);
+  }
+
+  p {
+    margin: 15px 0;
+  }
+</style>
+
+<article class="blog-post-wrapper">
+  <div class="blog-post">
+    <BlogHead blog={blog} isHeaderLink={true} />
+    <p class="description">{blog.data.description}</p>
+  </div>
+</article>

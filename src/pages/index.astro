@@ -1,49 +1,81 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { getCollection } from "astro:content";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { formatDate } from "../utils/preview-helper";
+
+const allPosts = await getCollection("blog");
+const posts = allPosts.sort(
+	(a, b) =>
+		new Date(String(b.data.pubDate)).valueOf() -
+		new Date(String(a.data.pubDate)).valueOf(),
+);
+// let firstPage = posts.slice(0, 3);
 ---
 
-<!doctype html>
+<style>
+	.color-contrast {
+		color: white;
+	}
+
+	.color-highlight {
+		color: var(--light-blue);
+	}
+
+	.intro {
+		font-size: var(--h1-text-size);
+	}
+	
+	.latest-heading {
+		font-size: var(--h2-text-size);
+	}
+	.article-list {
+		display: grid;
+		grid-template-columns: fit-content(200px) 1fr;
+		grid-row-gap: 9px;
+		grid-column-gap: 14px;
+	}
+</style>
+
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
+		<main class="wrapper color-contrast">
+			<h2 class="intro">Hiya, I'm Shreesh Bhat (they).</h2>
 			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
+				I am a <strong class="color-highlight">Software Engineer</strong> in <strong
+					class="color-highlight">Atlanta</strong
+				>. I enjoy working on <strong class="color-highlight"
+					>design systems</strong
+				>.
 			</p>
 			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
+				I care about performance, inclusive design, and compassionate coding. In
+				my spare time, you will often find me designing card games, listening to
+				music, board gaming with my partner, or working on
+				<a href="https://github.com/shreeshbhat/strike-off" target="_blank">Strike off</a>.
 			</p>
 			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
+				Find me on
+				<a href="https://boardgamegeek.com/boardgamedesigner/148964/shreesh-bhat" target="_blank">BoardGameGeek</a>,
+				<a href="https://github.com/shreeshbhat" target="_blank">GitHub</a>, or
+				<a href="https://bsky.app/profile/shreesh.bsky.social" target="_blank">Bluesky</a>.
 			</p>
+			<h2 class="latest-heading color-highlight">Latest posts</h2>
+			<div class="article-list">
+				{posts.map((blogpost) => (
+					<time class="date" datetime={blogpost.data.pubDate.toISOString()}>{formatDate(blogpost.data.pubDate.toISOString())}</time>
+					<div><a href={`/blog/${blogpost.id}/`}>{blogpost.data.title}</a></div>
+				))}
+			<div>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<!-- <PostPreview blog={blogpost} /> -->
