@@ -46,19 +46,19 @@ const posts = allPosts.sort(
 	<body>
 		<Header />
 		<main class="wrapper color-contrast">
-			<h2 class="intro">Hiya, I'm Shreesh Bhat (they).</h2>
+			<h2 class="intro">Hiya, I'm Shreesh Bhat.</h2>
 			<p>
-				I am a <strong class="color-highlight">Software Engineer</strong> in <strong
+				My pronouns are they/their. In
+				my spare time, you will often find me designing card games, listening to
+				music, or playing board games with my partner & friends.
+			</p>
+			<p>
+				I work as a <strong class="color-highlight">Software Engineer</strong> in <strong
 					class="color-highlight">Atlanta</strong
 				>. I enjoy working on <strong class="color-highlight"
 					>design systems</strong
-				>.
-			</p>
-			<p>
-				I care about performance, inclusive design, and compassionate coding. In
-				my spare time, you will often find me designing card games, listening to
-				music, board gaming with my partner, or working on
-				<a href="https://github.com/shreeshbhat/strike-off" target="_blank">Strike off</a>.
+				>. I care about performance, inclusive design, and compassionate coding. I used to work on
+				<a href="https://github.com/shreeshbhat/strike-off" target="_blank">Strike off</a> (PWA app for to-do lists).
 			</p>
 			<p>
 				Find me on
@@ -69,7 +69,7 @@ const posts = allPosts.sort(
 			<h2 class="latest-heading color-highlight">Latest posts</h2>
 			<div class="article-list">
 				{posts.map((blogpost) => (
-					<time class="date" datetime={blogpost.data.pubDate.toISOString()}>{formatDate(blogpost.data.pubDate.toISOString())}</time>
+					<time class="date" datetime={blogpost.data.pubDate}>{formatDate(blogpost.data.pubDate)}</time>
 					<div><a href={`/blog/${blogpost.id}/`}>{blogpost.data.title}</a></div>
 				))}
 			<div>
